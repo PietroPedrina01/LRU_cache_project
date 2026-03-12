@@ -25,10 +25,8 @@ typedef struct HashMap HashMap;
 
 HashMap* initialize_HashMap(int capacity) {
     HashMap* hash_map = (HashMap*)malloc(sizeof(HashMap));
-    if (!hash_map) {
-        printf("Memory allocation failed\n");
+    if (!hash_map)
         return NULL;
-    }
 
     hash_map->num_elements = 0;
     hash_map->capacity     = capacity;
@@ -84,7 +82,7 @@ void resize(HashMap* hash_map, int new_capacity) {
     hash_map->capacity = new_capacity;
 }
 
-int put(HashMap* hash_map, char* key, char* value) {
+int put_no_resize(HashMap* hash_map, char* key, char* value) {
     Node* node = (Node*)malloc(sizeof(Node));
     if (!node)
         return 1;
@@ -109,6 +107,12 @@ int put(HashMap* hash_map, char* key, char* value) {
     }
 
     hash_map->num_elements++;
+
+    return 0;
+}
+
+int put(HashMap* hash_map, char* key, char* value) {
+    put_no_resize(hash_map, key, value);
 
     float load_factor = (float)hash_map->num_elements / hash_map->capacity;
     if (load_factor >= 0.75f)
@@ -136,7 +140,7 @@ char* get(HashMap* hash_map, char* key) {
     return node ? node->value : NULL;
 }
 
-int remove_Node(HashMap* hash_map, char* key) {
+int remove_Node_no_resize(HashMap* hash_map, char* key) {
     Node* node = search(hash_map, key);
     if (!node)
         return 1;
@@ -154,6 +158,12 @@ int remove_Node(HashMap* hash_map, char* key) {
 
     free(node);
     hash_map->num_elements--;
+
+    return 0;
+}
+
+int remove_Node(HashMap* hash_map, char* key) {
+    remove_Node_no_resize(hash_map, key);
 
     float load_factor = (float)hash_map->num_elements / hash_map->capacity;
     if (load_factor <= 0.25f && hash_map->capacity > 1)
