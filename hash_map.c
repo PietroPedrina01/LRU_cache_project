@@ -4,41 +4,41 @@ int main() {
 
     HashMap* hash_map = initialize_HashMap(2);
     if (!hash_map) {
-        printf("Memory allocation failed");
+        printf("Memory allocation failed\n");
     }
 
     print_HashMap(hash_map);
 
     if ((put(hash_map, "John Smith", "521-1234")) != 0) {
-        printf("Error in inserting");
+        printf("Error in inserting\n");
         return 1;
     }
 
     print_HashMap(hash_map);
 
     if ((put(hash_map, "Lisa Smith", "521-8976")) != 0) {
-        printf("Error in inserting");
+        printf("Error in inserting\n");
         return 1;
     }
 
     print_HashMap(hash_map);
 
     if ((put(hash_map, "Sam Doe", "521-5030")) != 0) {
-        printf("Error in inserting");
+        printf("Error in inserting\n");
         return 1;
     }
 
     print_HashMap(hash_map);
 
     if ((put(hash_map, "Sandra Dee", "521-9655")) != 0) {
-        printf("Error in inserting");
+        printf("Error in inserting\n");
         return 1;
     }
 
     print_HashMap(hash_map);
 
     if ((put(hash_map, "Ted Baker", "418-4165")) != 0) {
-        printf("Error in inserting");
+        printf("Error in inserting\n");
         return 1;
     }
 
