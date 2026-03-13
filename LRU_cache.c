@@ -36,7 +36,7 @@ int main() {
 
     print_LRU_cache(cache);
 
-    if (put_cache(cache, "5", "5") != 0) {
+    if (put_cache(cache, "3", "3") != 0) {
         printf("Put failed\n");
         return 1;
     }

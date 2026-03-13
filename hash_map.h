@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 struct Node {
     char*        key;
@@ -99,11 +100,22 @@ int put_no_resize(HashMap* hash_map, char* key, char* value) {
         bucket->nodes = node;
         bucket->hash  = index;
     } else {
-        Node* tail = bucket->nodes;
-        while (tail->next != NULL)
-            tail = tail->next;
-        tail->next = node;
-        node->prev = tail;
+        Node* tmp        = bucket->nodes;
+        Node* tmp_before = tmp;
+        bool  found      = false;
+        while (tmp != NULL) {
+            if (strcmp(tmp->key, key) == 0) {
+                tmp->value = value;
+                found      = true;
+                break;
+            }
+            tmp_before = tmp;
+            tmp        = tmp->next;
+        }
+        if (!found) {
+            tmp_before->next = node;
+            node->prev       = tmp_before;
+        }
     }
 
     hash_map->num_elements++;

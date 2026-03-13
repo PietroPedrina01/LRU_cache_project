@@ -55,6 +55,14 @@ int main() {
 
     print_HashMap(hash_map);
 
+    // Now Ted has changed his number
+    if ((put(hash_map, "Ted Baker", "418-4321")) != 0) {
+        printf("Error in inserting\n");
+        return 1;
+    }
+
+    print_HashMap(hash_map);
+
     // Now a lot of friends are not funny
     if (remove_Node(hash_map, "Lisa Smith") != 0) {
         printf("Lisa Smith not found");
